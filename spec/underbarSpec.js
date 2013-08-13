@@ -151,9 +151,9 @@ describe("pluck", function() {
 
 describe("invoke, when provided a function reference", function() {
   it("runs the input function on each item in the array, and returns a list of results", function() {
-    var reverse = function(string){
-      if(!string.length){ return ''; }
-      return reverse(string.slice(1)) + string[0];
+    var reverse = function(){
+      if(!this.length){ return ''; }
+      return reverse(this.slice(1)) + this[0];
     };
     var reversedStrings = _.invoke(['dog', 'cat'], reverse);
     expect(reversedStrings).to.eql(['god', 'tac']);
