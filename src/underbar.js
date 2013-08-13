@@ -143,11 +143,12 @@ var _ = {};
   };
 
   // Calls the method named by methodName on each value in the list.
-  _.invoke = function(list, methodName, args) {
+  // Note: you will nead to learn a bit about .apply to complete this
+  _.invoke = function(list, functionOrKey, args) {
     /* SOLUTION */
-    return _.map(list, function(val, i, list) {
-      var method = typeof methodName === 'string' ? list[methodName] : methodName;
-      return method.apply(val, args);
+    return _.map(list, function(item) {
+      var method = typeof functionOrKey === 'string' ? item[functionOrKey] : functionOrKey;
+      return method.apply(item, args);
     });
     /* END SOLUTION */
   };
