@@ -149,31 +149,21 @@ describe("pluck", function() {
   });
 });
 
-describe("invoke", function() {
-  it("should sort the first array", function() {
-    var lists = [[5, 1, 7], [3, 2, 1]];
-    var result = _.invoke(lists, 'sort');
-    expect(result[0]).to.eql([1, 5, 7]);
-  });
-
-  it("should sort the second array", function() {
-    var lists = [[5, 1, 7], [3, 2, 1]];
-    var result = _.invoke(lists, 'sort');
-    expect(result[1]).to.eql([1, 2, 3]);
+describe("invoke, when provided a function reference", function() {
+  it("runs the input function on each item in the array, and returns a list of results", function() {
+    var reverse = function(string){
+      if(!string.length){ return ''; }
+      return reverse(string.slice(1)) + string[0];
+    };
+    var reversedStrings = _.invoke(['dog', 'cat'], reverse);
+    expect(reversedStrings).to.eql(['god', 'tac']);
   });
 });
 
-describe("invoke with function reference", function() {
-  it("should sort the first array", function() {
-    var list = [[5, 1, 7], [3, 2, 1]];
-    var result = _.invoke(list, Array.prototype.sort);
-    expect(result[0]).to.eql([1, 5, 7]);
-  });
-
-  it("should sort the second array", function() {
-    var list = [[5, 1, 7], [3, 2, 1]];
-    var result = _.invoke(list, Array.prototype.sort);
-    expect(result[1]).to.eql([1, 2, 3]);
+describe("invoke, when provided a method name", function() {
+  it("runs the specified method on each item in the array, and returns a list of results", function() {
+    var upperCasedStrings = _.invoke(['dog', 'cat'], 'toUpperCase');
+    expect(upperCasedStrings).to.eql(['DOG', 'CAT']);
   });
 });
 
