@@ -32,55 +32,55 @@ describe("last", function() {
 
 describe("each", function() {
   it("should provide value and iteration count", function() {
-    var letters = ['a', 'b', 'c'];
-    var iterations = [];
+    var animals = ['ant', 'bat', 'cat'];
+    var iterationInputs = [];
 
-    _.each(letters, function(letter, index, collection) {
-      iterations.push([letter, index, collection]);
+    _.each(animals, function(animal, index, list) {
+      iterationInputs.push([animal, index, list]);
     });
 
-    expect(iterations).to.eql([
-      ['a', 0, letters],
-      ['b', 1, letters],
-      ['c', 2, letters]
+    expect(iterationInputs).to.eql([
+      ['ant', 0, animals],
+      ['bat', 1, animals],
+      ['cat', 2, animals]
     ]);
   });
 
   it("should iterate over objects", function() {
-    var letters = {d: 'dog', e: 'elephant', f: 'flotsam'};
-    var iterations = [];
+    var animals = {a: 'ant', b: 'bat', c: 'cat'};
+    var iterationInputs = [];
 
-    _.each(letters, function(value, property, object) {
-      iterations.push([value, property, object]);
+    _.each(animals, function(animal, key, object) {
+      iterationInputs.push([animal, key, object]);
     });
 
     expect(iterations).to.eql([
-      ['dog', 'd', letters],
-      ['elephant', 'e', letters],
-      ['flotsam', 'f', letters]
+      ['ant', 'a', iterationInputs],
+      ['bat', 'b', iterationInputs],
+      ['cat', 'c', iterationInputs]
     ]);
   });
 });
 
 describe("indexOf", function() {
 
-  it("should be able to compute indexOf even when the native function is undefined", function() {
-    var numbers = [1, 2, 3];
-    numbers.indexOf = null;
-    expect(_.indexOf(numbers, 2)).to.be(1);
-  });
-
-  it("should not have 35 in the list", function() {
-    var numbers = [10, 20, 30, 40, 50];
-    expect(_.indexOf(numbers, 35)).to.be(-1);
-  });
-
   it("should have 40 in the list", function() {
     var numbers = [10, 20, 30, 40, 50];
     expect(_.indexOf(numbers, 40)).to.be(3);
   });
 
-  it("should have 40 in the list even when there are duplicates", function() {
+  it("should be able to compute indexOf even when the native function is undefined", function() {
+    var numbers = [10, 20, 30];
+    numbers.indexOf = null;
+    expect(_.indexOf(numbers, 20)).to.be(1);
+  });
+
+  it("returns -1 when the target cannot be found not in the list", function() {
+    var numbers = [10, 20, 30, 40, 50];
+    expect(_.indexOf(numbers, 35)).to.be(-1);
+  });
+
+  it("returns the first index that the target can be found at when there are multiple matches", function() {
     var numbers = [1, 40, 40, 40, 40, 40, 40, 40, 50, 60, 70];
     expect(_.indexOf(numbers, 40)).to.be(1);
   });
@@ -88,17 +88,13 @@ describe("indexOf", function() {
 
 describe("filter", function() {
   it("should return all even numbers in an array", function() {
-    var isEven = function(num) {
-      return num % 2 === 0;
-    };
+    var isEven = function(num) { return num % 2 === 0; };
     var evens = _.filter([1, 2, 3, 4, 5, 6], isEven);
     expect(evens).to.eql([2, 4, 6]);
   });
 
   it("should return all odd numbers in an array", function() {
-    var isOdd = function(num) {
-      return num % 2 !== 0;
-    };
+    var isOdd = function(num) { return num % 2 !== 0; };
     var odds = _.filter([1, 2, 3, 4, 5, 6], isOdd);
     expect(odds).to.eql([1, 3, 5]);
   });
@@ -133,7 +129,9 @@ describe("uniq", function() {
 
 describe("map", function() {
   it("should apply a function to every value in an array", function() {
-    var doubled = _.map([1, 2, 3], function(num) { return num * 2; });
+    var doubled = _.map([1, 2, 3], function(num) {
+      return num * 2;
+    });
     expect(doubled).to.eql([2, 4, 6]);
   });
 });
@@ -169,69 +167,63 @@ describe("invoke, when provided a method name", function() {
 
 describe("reduce", function() {
   it("should be able to sum up an array", function() {
-    var callback = function(sum, num) {return sum + num; };
-    var sum = _.reduce([1, 2, 3], callback, 0);
-    expect(sum).to.equal(6);
-  });
-
-  it("should be able to sum up an array without being provided an initial value (as long as the array contains at least one element)", function() {
-    var sum = _.reduce([1, 2, 3], function(sum, num) {
-      return sum + num;
-    });
-    expect(sum).to.equal(6);
+    var add = function(tally, item) {return tally + item; };
+    var total = _.reduce([1, 2, 3], add, 0);
+    expect(total).to.equal(6);
   });
 
 });
 
 describe("contains", function() {
-  it("should return true if a collection contains a user-specified value", function() {
-    expect(_.contains([1,2,3], 2)).to.equal(true);
-    expect(_.contains({moe:1, larry:3, curly:9}, 3)).to.equal(true);
+  it("should return false if a collection does not contain a user-specified value", function() {
+    expect(_.contains([4,5,6], 2)).to.equal(false);
   });
 
-  it("should return false if a collection does not contain a user-specified value", function() {
-    expect(_.contains([1,3,9], 2)).to.equal(false);
+  it("should return true if a collection contains a user-specified value", function() {
+    expect(_.contains([  4,   5,   6], 5)).to.equal(true);
   });
+  
+  it('can operate on objects', function(){
+    expect(_.contains({a:4, b:5, c:6}, 5)).to.equal(true);
+  })
 });
 
 describe("every", function() {
-  var getValue = function(i) { return i; };
-  var isEven = function(num) { return num % 2 === 0; };
+  var passThrough = function(input) { return input; };
 
-  it("should handle an empty set", function() {
-    expect(_.every([], getValue)).to.equal(true);
+  it("passes by default for an empty collection", function() {
+    expect(_.every([], passThrough)).to.equal(true);
   });
 
-  it("should handle a set that contains only true values", function() {
-    expect(_.every([true, true, true], getValue)).to.equal(true);
+  it("passes for a collection of all-truthy results", function() {
+    expect(_.every([true, {}, 1], passThrough)).to.equal(true);
   });
 
-  it("should handle a set that contains one false value", function() {
-    expect(_.every([true, false, true], getValue)).to.equal(false);
+  it("fails for a collection of all-falsey results", function() {
+    expect(_.every([null, 0, undefined], passThrough)).to.equal(true);
   });
 
-  it("should handle a set that contains even numbers", function() {
+  it("fails for a collection containing mixed falsey and truthy results", function() {
+    expect(_.every([true, false, 1], passThrough)).to.equal(false);
+  });
+
+  it("handles callbacks that do work on the input", function() {
+    var isEven = function(num) { return num % 2 === 0; };
     expect(_.every([0, 10, 28], isEven)).to.equal(true);
-  });
-
-  it("should handle a set that contains an odd number", function() {
     expect(_.every([0, 11, 28], isEven)).to.equal(false);
   });
 
-  it("should cast to boolean true", function() {
-    expect(_.every([1], getValue)).to.equal(true);
+  it("casts the result to a boolean", function() {
+    expect(_.every([1], passThrough)).to.equal(true);
+    expect(_.every([0], passThrough)).to.equal(false);
   });
 
-  it("should cast to boolean false", function() {
-    expect(_.every([0], getValue)).to.equal(false);
-  });
-
-  it("should handle not being passed an iterator", function() {
+  it("treats each item as as a callback result when no callback is provided", function() {
     expect(_.every([true, true, true])).to.equal(true);
   });
 
-  it("should work with an array that contains several undefined values", function() {
-    expect(_.every([undefined, undefined, undefined], getValue)).to.equal(false);
+  it("works when provded a collection containing undefined values", function() {
+    expect(_.every([undefined, undefined, undefined], passThrough)).to.equal(false);
   });
 });
 
@@ -240,8 +232,8 @@ describe("some", function() {
   var isEven = function(number){
     return number % 2 === 0;
   };
-  var passThrough = function(firstArgument){
-    return firstArgument;
+  var passThrough = function(input){
+    return input;
   };
 
   beforeEach(function() {
@@ -255,52 +247,62 @@ describe("some", function() {
     expect(_.some([])).to.equal(false);
   });
 
-  it("should handle a set containing 'false' values", function() {
-    expect(_.some([false, false, false])).to.equal(false);
+  it("passes for a collection of all-truthy results", function() {
+    expect(_.some([true, {}, 1], passThrough)).to.equal(true);
   });
 
-  it("should handle a set containing one 'true' value", function() {
-    expect(_.some([false, false, true])).to.equal(true);
+  it("fails for a collection of all-falsey results", function() {
+    expect(_.some([null, 0, undefined], passThrough)).to.equal(true);
   });
 
-  it("should handle a set containing a string", function() {
+  it("passes for a collection containing mixed falsey and truthy results", function() {
+    expect(_.some([true, false, 1], passThrough)).to.equal(true);
+  });
+
+  it("passes for a set containing one truthy value that is a string", function() {
     expect(_.some([null, 0, 'yes', false])).to.equal(true);
   });
 
-  it("should handle a set that contains falsy values", function() {
-    expect(_.some([null, 0, '', false])).to.equal(false);
-  });
-
-  it("should handle a set that contains all odd numbers", function() {
+  it("fails for a set containing no matching values", function() {
     expect(_.some([1, 11, 29], isEven)).to.equal(false);
   });
 
-  it("should handle a set that contains an even number", function() {
+  it("passes for a collection containing one matching value", function() {
     expect(_.some([1, 10, 29], isEven)).to.equal(true);
   });
 
-  it("should handle casting to boolean - true", function() {
+  it("casts the result to a boolean", function() {
     expect(_.some([1], passThrough)).to.equal(true);
-  });
-
-  it("should handle casting to boolean - false", function() {
     expect(_.some([0], passThrough)).to.equal(false);
   });
 });
 
 describe("extend", function() {
+  it("returns the first argument", function() {
+    var to = {};
+    var from = {};
+    var extended = _.extend(to, from);
+    expect(extended).to.equal(to);
+  });
+
   it("should extend an object with the attributes of another", function() {
-    var extended = _.extend({}, {a:'b'});
+    var to = {};
+    var from = {a:'b'};
+    var extended = _.extend(to, from);
     expect(extended.a).to.equal('b');
   });
 
   it("should override properties found on the destination", function() {
-    var extended = _.extend({a:'x'}, {a:'b'});
+    var to = {a:'x'};
+    var from = {a:'b'};
+    var extended = _.extend(to, from);
     expect(extended.a).to.equal('b');
   });
 
   it("should not override properties not found in the source", function() {
-    var extended = _.extend({x:'x'}, {a:'b'});
+    var to = {x:'x'};
+    var from = {a:'b'};
+    var extended = _.extend(to, from);
     expect(extended.x).to.equal('x');
   });
 
@@ -328,19 +330,41 @@ describe("defaults", function() {
     _.defaults(options, {zero: 1, one: 10, twenty: 20}, {empty: "full"}, {nan: "nan"}, {word: "word"}, {word: "dog"});
   });
 
-  it("should apply a value when one doesn't already exist on the target", function() {
-    expect(options.zero).to.equal(0);
-    expect(options.one).to.equal(1);
-    expect(options.twenty).to.equal(20);
+  it("returns the first argument", function() {
+    var to = {};
+    var from = {};
+    var defaulted = _.defaults(to, from);
+    expect(defaulted).to.equal(to);
   });
 
-  it("should not apply a value if one already exist on the target", function() {
-    expect(options.empty).to.equal("");
-    expect(isNaN(options.nan)).to.equal(true);
+  it("should copy a property if that key is already set on the target", function() {
+    var to = {};
+    var from = {a:1};
+    var defaulted = _.defaults(to, from);
+    expect(defaulted.a).to.equal(1);
   });
 
-  it("if two identical values are passed in, the first one wins", function() {
-    expect(options.word).to.equal("word");
+  it("should not copy a property if that key is already set on the target", function() {
+    var to = {a:10};
+    var from = {a:1};
+    var defaulted = _.defaults(to, from);
+    expect(defaulted.a).to.equal(10);
+  });
+
+  it("should not copy a property if that key is already set on the target, even if the value for that key is falsey", function() {
+    var to = {a: '', b: NaN};
+    var from = {a: 1, b: 2};
+    var defaulted = _.defaults(to, from);
+    expect(defaulted.a).to.equal('');
+    expect(isNaN(defaulted.b)).to.equal(true);
+  });
+
+  it("prefers the first value found, when two objects are provided with properties at the same key", function() {
+    var to = {};
+    var from = {a: 1};
+    var alsoFrom = {a: 2};
+    var defaulted = _.defaults(to, from, alsoFrom);
+    expect(defaulted.a).to.equal(1);
   });
 });
 
@@ -360,7 +384,8 @@ describe("once", function() {
 describe("memoize", function() {
   it("a memoized function should produce the same result when called with the same arguments", function() {
     var fib = function(n) {
-      return n < 2 ? n : fib(n - 1) + fib(n - 2);
+      if(n < 2){ return n; }
+      return fib(n - 1) + fib(n - 2);
     };
     expect(fib(10)).to.equal(55);
 
@@ -370,7 +395,8 @@ describe("memoize", function() {
 
   it("should give different results for different arguments", function() {
     var fib = function(n) {
-      return n < 2 ? n : fib(n - 1) + fib(n - 2);
+      if(n < 2){ return n; }
+      return fib(n - 1) + fib(n - 2);
     };
     expect(fib(10)).to.equal(55);
     var fastFib = _.memoize(fib);
@@ -380,11 +406,10 @@ describe("memoize", function() {
 });
 
 describe("delay", function() {
-  var clock, delayed, callback;
+  var clock;
 
   beforeEach(function() {
     clock = sinon.useFakeTimers();
-    callback = sinon.spy();
   });
 
   afterEach(function() {
@@ -392,8 +417,8 @@ describe("delay", function() {
   });
 
   it("should only execute the function after the specified wait time", function() {
+    var callback = sinon.spy();
     _.delay(callback, 100);
-
     clock.tick(99);
     expect(callback.notCalled).to.be(true);
     clock.tick(1);
@@ -401,6 +426,7 @@ describe("delay", function() {
   });
 
   it("should have successfully passed function arguments in", function() {
+    var callback = sinon.spy();
     _.delay(callback, 100, 1, 2);
     clock.tick(100);
 
@@ -410,10 +436,11 @@ describe("delay", function() {
 
 describe("shuffle", function() {
   it("should not modify the original object", function() {
-    var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var numbers = [4, 5, 6];
     var shuffled = _.shuffle(numbers).sort();
 
     expect(shuffled).to.not.equal(numbers);
+    expect(numbers).to.eql([4, 5, 6]);
   });
 });
 
