@@ -11,6 +11,16 @@ var _ = {};
    * In this section, we'll have a look at functions that operate on collections
    * of values; in JavaScript, a 'collection' is something that can contain a
    * number of values--either an array or an object.
+   *
+   *
+   * IMPORTANT NOTE!
+   * ===========
+   *
+   * The .first function is implemented for you, to help guide you toward success
+   * in your work on the following functions. Whenever you see a portion of the
+   * assignment pre-completed, be sure to read and understanding it fully before
+   * you proceed. Skipping this step will lead to considerably more difficulty
+   * implementing the sections you are responsible for.
    */
 
   // Return an array of the first n elements of an array. If n is undefined,
@@ -23,11 +33,10 @@ var _ = {};
   // last element.
   _.last = function(array, n) {
     /* SOLUTION */
+    // When the input n not is provided, we return a single value from the array,
+    // rather than an array of values
     if (n === undefined) {
       return array[array.length - 1];
-    }
-    if (n === 0) {
-      return [];
     }
     return array.slice(Math.max(0, array.length - n));
     /* END SOLUTION */
@@ -37,10 +46,6 @@ var _ = {};
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
     /* SOLUTION */
-    if (iterator === undefined) {
-      return undefined;
-    }
-
     if (Array.isArray(collection)) {
       for (var i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
