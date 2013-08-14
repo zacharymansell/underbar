@@ -76,25 +76,25 @@ var _ = {};
   };
 
   // Return all elements of an array that pass a truth test.
-  _.filter = function(collection, iterator) {
+  _.filter = function(collection, test) {
     /* SOLUTION */
     var result = [];
-
+    
     _.each(collection, function(val) {
-      iterator(val) && result.push(val);
+      test(val) && result.push(val);
     });
-
+    
     return result;
     /* END SOLUTION */
   };
 
   // Return all elements of an array that don't pass a truth test.
-  _.reject = function(collection, iterator) {
+  _.reject = function(collection, test) {
     // TIP: see if you can re-use _.select() here, without simply
     // copying code in and modifying it
     /* SOLUTION */
     return _.filter(collection, function(val) {
-      return !iterator(val);
+      return !test(val);
     });
     /* END SOLUTION */
   };
@@ -105,7 +105,7 @@ var _ = {};
     var hash = {};
 
     _.each(array, function(val) {
-      hash[val] = val;
+      hash[val] = true;
     });
 
     return Object.keys(hash);
@@ -114,18 +114,18 @@ var _ = {};
 
 
   // Return the results of applying an iterator to each element.
-  _.map = function(array, iterator) {
+  _.map = function(collection, iterator) {
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     /* SOLUTION */
-    var result = [];
+    var results = [];
 
-    _.each(array, function(val, index, array) {
-      result.push(iterator(val, index, array));
+    _.each(array, function(item, index, collection) {
+      results.push(iterator(item, index, collection));
     });
 
-    return result;
+    return results;
     /* END SOLUTION */
   };
 
@@ -138,20 +138,20 @@ var _ = {};
   // Takes an array of objects and returns and array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
-  _.pluck = function(array, propertyName) {
+  _.pluck = function(collection, key) {
     // TIP: map is really handy when you want to transform an array of
     // values into a new array of values. _.pluck() is solved for you
     // as an example of this.
-    return _.map(array, function(value){
-      return value[propertyName];
+    return _.map(collection, function(item){
+      return item[key];
     });
   };
 
   // Calls the method named by methodName on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this
-  _.invoke = function(list, functionOrKey, args) {
+  _.invoke = function(collection, functionOrKey, args) {
     /* SOLUTION */
-    return _.map(list, function(item) {
+    return _.map(collection, function(item) {
       var method = typeof functionOrKey === 'string' ? item[functionOrKey] : functionOrKey;
       return method.apply(item, args);
     });
@@ -171,20 +171,20 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   //
-  _.reduce = function(collection, iterator, initialValue) {
+  _.reduce = function(collection, iterator, accumulator) {
     /* SOLUTION */
-    var initial = initialValue === undefined;
+    var initializing = arguments.length === 2;
 
     _.each(collection, function(val, i, list) {
-      if (initial) {
-        initial = false;
-        initialValue = val;
+      if (initializing) {
+        initializing = false;
+        accumulator = val;
       } else {
-        initialValue = iterator(initialValue, val);
+        accumulator = iterator(accumulator, val);
       }
     });
 
-    return initialValue;
+    return accumulator;
     /* END SOLUTION */
   };
 
