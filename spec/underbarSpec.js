@@ -316,7 +316,7 @@ describe("extend", function() {
     expect(extended).to.eql({x:2, a:1});
   });
 
-  it("should not copy undefined values", function() {
+  it("should copy undefined values", function() {
     var extended = _.extend({}, {a: void 0, b: null});
     expect('a' in extended && 'b' in extended).to.be(true);
   });
