@@ -79,11 +79,11 @@ var _ = {};
   _.filter = function(collection, test) {
     /* SOLUTION */
     var result = [];
-    
+
     _.each(collection, function(val) {
       test(val) && result.push(val);
     });
-    
+
     return result;
     /* END SOLUTION */
   };
@@ -121,7 +121,7 @@ var _ = {};
     /* SOLUTION */
     var results = [];
 
-    _.each(array, function(item, index, collection) {
+    _.each(collection, function(item, index, collection) {
       results.push(iterator(item, index, collection));
     });
 
