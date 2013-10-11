@@ -184,12 +184,11 @@ var _ = {};
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-  //
   _.reduce = function(collection, iterator, accumulator) {
     /* SOLUTION */
     var initializing = arguments.length === 2;
 
-    _.each(collection, function(val, i, list) {
+    _.each(collection, function(val) {
       if (initializing) {
         initializing = false;
         accumulator = val;
@@ -354,7 +353,11 @@ var _ = {};
    * ==============================
    */
 
-  // Shuffle an array.
+  // Randomizes the order of an array's contents.
+  //
+  // TIP: This function's test suite will ask that you not modify the original
+  // input array. For a tip on how to make a copy of an array, see:
+  // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
     /* SOLUTION */
     // See http://bost.ocks.org/mike/shuffle/ for an in-depth explanation of the
