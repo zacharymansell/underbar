@@ -63,25 +63,30 @@ describe('each', function() {
 });
 
 describe('indexOf', function() {
-
   it('should have 40 in the list', function() {
     var numbers = [10, 20, 30, 40, 50];
+
     expect(_.indexOf(numbers, 40)).to.be(3);
   });
 
   it('should be able to compute indexOf even when the native function is undefined', function() {
     var numbers = [10, 20, 30];
+
+    // If the browser provides a native indexOf array method, disable it
     numbers.indexOf = null;
+
     expect(_.indexOf(numbers, 20)).to.be(1);
   });
 
   it('returns -1 when the target cannot be found not in the list', function() {
     var numbers = [10, 20, 30, 40, 50];
+
     expect(_.indexOf(numbers, 35)).to.be(-1);
   });
 
   it('returns the first index that the target can be found at when there are multiple matches', function() {
     var numbers = [1, 40, 40, 40, 40, 40, 40, 40, 50, 60, 70];
+
     expect(_.indexOf(numbers, 40)).to.be(1);
   });
 });
@@ -90,12 +95,14 @@ describe('filter', function() {
   it('should return all even numbers in an array', function() {
     var isEven = function(num) { return num % 2 === 0; };
     var evens = _.filter([1, 2, 3, 4, 5, 6], isEven);
+
     expect(evens).to.eql([2, 4, 6]);
   });
 
   it('should return all odd numbers in an array', function() {
     var isOdd = function(num) { return num % 2 !== 0; };
     var odds = _.filter([1, 2, 3, 4, 5, 6], isOdd);
+
     expect(odds).to.eql([1, 3, 5]);
   });
 });
@@ -104,12 +111,14 @@ describe('reject', function() {
   it('should reject all even numbers', function() {
     var isEven = function(num) { return num % 2 === 0; };
     var odds = _.reject([1, 2, 3, 4, 5, 6], isEven);
+
     expect(odds).to.eql([1, 3, 5]);
   });
 
   it('should reject all odd numbers', function() {
     var isOdd = function(num) { return num % 2 !== 0; };
     var evens = _.reject([1, 2, 3, 4, 5, 6], isOdd);
+
     expect(evens).to.eql([2, 4, 6]);
   });
 });
@@ -117,12 +126,14 @@ describe('reject', function() {
 describe('uniq', function() {
   it('should return all unique values contained in an unsorted array', function() {
     var list = [1, 2, 1, 3, 1, 4];
+
     expect(_.uniq(list)).to.eql([1, 2, 3, 4]);
   });
 
   it('should handle iterators that work with a sorted array', function() {
     var iterator = function(value) { return value +1; };
     var list = [1, 2, 2, 3, 4, 4];
+
     expect(_.uniq(list, true, iterator)).to.eql([1, 2, 3, 4]);
   });
 });
@@ -132,6 +143,7 @@ describe('map', function() {
     var doubled = _.map([1, 2, 3], function(num) {
       return num * 2;
     });
+
     expect(doubled).to.eql([2, 4, 6]);
   });
 });
@@ -161,6 +173,7 @@ describe('invoke, when provided a function reference', function() {
 describe('invoke, when provided a method name', function() {
   it('runs the specified method on each item in the array, and returns a list of results', function() {
     var upperCasedStrings = _.invoke(['dog', 'cat'], 'toUpperCase');
+
     expect(upperCasedStrings).to.eql(['DOG', 'CAT']);
   });
 });
@@ -169,6 +182,7 @@ describe('reduce', function() {
   it('should be able to sum up an array', function() {
     var add = function(tally, item) {return tally + item; };
     var total = _.reduce([1, 2, 3], add, 0);
+
     expect(total).to.equal(6);
   });
 
@@ -185,7 +199,7 @@ describe('contains', function() {
 
   it('can operate on objects', function(){
     expect(_.contains({a:4, b:5, c:6}, 5)).to.equal(true);
-  })
+  });
 });
 
 describe('every', function() {
@@ -209,6 +223,7 @@ describe('every', function() {
 
   it('handles callbacks that do work on the input', function() {
     var isEven = function(num) { return num % 2 === 0; };
+
     expect(_.every([0, 10, 28], isEven)).to.equal(true);
     expect(_.every([0, 11, 28], isEven)).to.equal(false);
   });
@@ -239,6 +254,7 @@ describe('some', function() {
   beforeEach(function() {
     Array.prototype.some = null;
   });
+
   afterEach(function() {
     Array.prototype.some = nativeSome;
   });
@@ -282,6 +298,7 @@ describe('extend', function() {
     var to = {};
     var from = {};
     var extended = _.extend(to, from);
+
     expect(extended).to.equal(to);
   });
 
@@ -289,6 +306,7 @@ describe('extend', function() {
     var to = {};
     var from = {a:'b'};
     var extended = _.extend(to, from);
+
     expect(extended.a).to.equal('b');
   });
 
@@ -296,6 +314,7 @@ describe('extend', function() {
     var to = {a:'x'};
     var from = {a:'b'};
     var extended = _.extend(to, from);
+
     expect(extended.a).to.equal('b');
   });
 
@@ -303,27 +322,31 @@ describe('extend', function() {
     var to = {x:'x'};
     var from = {a:'b'};
     var extended = _.extend(to, from);
+
     expect(extended.x).to.equal('x');
   });
 
   it('should extend from multiple source objects', function() {
     var extended = _.extend({x:1}, {a:2}, {b:3});
+
     expect(extended).to.eql({x:1, a:2, b:3});
   });
 
   it('in the case of a conflict, it should use the last property\'s values when extending from multiple source objects', function() {
     var extended = _.extend({x:'x'}, {a:'a', x:2}, {a:1});
+
     expect(extended).to.eql({x:2, a:1});
   });
 
   it('should copy undefined values', function() {
     var extended = _.extend({}, {a: void 0, b: null});
+
     expect('a' in extended && 'b' in extended).to.be(true);
   });
 });
 
 describe('defaults', function() {
-  var result, options;
+  var options;
 
   beforeEach(function() {
     options = {zero: 0, one: 1, empty: '', nan: NaN, string: 'string'};
@@ -334,6 +357,7 @@ describe('defaults', function() {
     var to = {};
     var from = {};
     var defaulted = _.defaults(to, from);
+
     expect(defaulted).to.equal(to);
   });
 
@@ -341,6 +365,7 @@ describe('defaults', function() {
     var to = {};
     var from = {a:1};
     var defaulted = _.defaults(to, from);
+
     expect(defaulted.a).to.equal(1);
   });
 
@@ -348,6 +373,7 @@ describe('defaults', function() {
     var to = {a:10};
     var from = {a:1};
     var defaulted = _.defaults(to, from);
+
     expect(defaulted.a).to.equal(10);
   });
 
@@ -355,6 +381,7 @@ describe('defaults', function() {
     var to = {a: '', b: NaN};
     var from = {a: 1, b: 2};
     var defaulted = _.defaults(to, from);
+
     expect(defaulted.a).to.equal('');
     expect(isNaN(defaulted.b)).to.equal(true);
   });
@@ -364,6 +391,7 @@ describe('defaults', function() {
     var from = {a: 1};
     var alsoFrom = {a: 2};
     var defaulted = _.defaults(to, from, alsoFrom);
+
     expect(defaulted.a).to.equal(1);
   });
 });
@@ -372,8 +400,9 @@ describe('once', function() {
   it('should only run a user-defined function if it hasn\'t been run before', function() {
     var num = 0;
     var increment = _.once(function() {
-      num++;
+      num += 1;
     });
+
     increment();
     increment();
 
@@ -382,24 +411,24 @@ describe('once', function() {
 });
 
 describe('memoize', function() {
-  it('a memoized function should produce the same result when called with the same arguments', function() {
-    var fib = function(n) {
+  var fib, fastFib;
+
+  beforeEach(function() {
+    fib = function(n) {
       if(n < 2){ return n; }
       return fib(n - 1) + fib(n - 2);
     };
-    expect(fib(10)).to.equal(55);
 
-    var fastFib = _.memoize(fib);
+    fastFib = _.memoize(fib);
+  });
+
+  it('a memoized function should produce the same result when called with the same arguments', function() {
+    expect(fib(10)).to.equal(55);
     expect(fastFib(10)).to.equal(55);
   });
 
   it('should give different results for different arguments', function() {
-    var fib = function(n) {
-      if(n < 2){ return n; }
-      return fib(n - 1) + fib(n - 2);
-    };
     expect(fib(10)).to.equal(55);
-    var fastFib = _.memoize(fib);
     expect(fastFib(10)).to.equal(55);
     expect(fastFib(7)).to.equal(13);
   });
@@ -419,14 +448,19 @@ describe('delay', function() {
   it('should only execute the function after the specified wait time', function() {
     var callback = sinon.spy();
     _.delay(callback, 100);
+
     clock.tick(99);
+
     expect(callback.notCalled).to.be(true);
+
     clock.tick(1);
+
     expect(callback.calledOnce).to.be(true);
   });
 
   it('should have successfully passed function arguments in', function() {
     var callback = sinon.spy();
+
     _.delay(callback, 100, 1, 2);
     clock.tick(100);
 
@@ -497,6 +531,7 @@ describe('sortBy', function() {
 describe('flatten', function() {
   it('can flatten nested arrays', function() {
     var nestedArray = [1, [2], [3, [[[4]]]]];
+
     expect(_.flatten(nestedArray)).to.eql([1,2,3,4]);
   });
 });
@@ -504,6 +539,7 @@ describe('flatten', function() {
 describe('zip', function() {
   it('should zip together arrays of different lengths', function() {
     var names = ['moe', 'larry', 'curly'], ages = [30, 40, 50], leaders = [true];
+
     expect(_.zip(names, ages, leaders)).to.eql([
       ['moe', 30, true],
       ['larry', 40, undefined],
@@ -516,6 +552,7 @@ describe('intersection', function() {
   it('should take the set intersection of two arrays', function() {
     var stooges = ['moe', 'curly', 'larry'];
     var leaders = ['moe', 'groucho'];
+
     expect(_.intersection(stooges, leaders)).to.eql(['moe']);
   });
 });
@@ -523,11 +560,13 @@ describe('intersection', function() {
 describe('difference', function() {
   it('should return the difference between two arrays', function() {
     var diff = _.difference([1,2,3], [2,30,40]);
+
     expect(diff).to.eql([1,3]);
   });
 
   it('should return the difference between three arrays', function() {
     var result = _.difference([1, 2, 3, 4], [2, 30, 40], [1, 11, 111]);
+
     expect(result).to.eql([3, 4]);
   });
 });
