@@ -65,7 +65,7 @@ each of the functions by making all the tests pass:
 - [ ] reduce
 - [ ] *contains*
 - [ ] every
-- [ ] any
+- [ ] some
 - [ ] extend
 - [ ] defaults
 - [ ] *once*
