@@ -52,8 +52,9 @@ The file `src/underbar.js` contains function definitions and explanations for
 the following functions (*italicized functions* are solved for you). Implement
 each of the functions by making all the tests pass:
 
-- [ ] last
+- [ ] identity
 - [ ] *first*
+- [ ] last
 - [ ] each
 - [ ] *indexOf*
 - [ ] filter
