@@ -164,7 +164,8 @@ var _ = {};
   // the return value of the previous iterator call.
   //
   // You can pass in an initialValue that is passed to the first iterator
-  // call. Defaults to 0.
+  // call. If initialValue is not explicitly passed in, it should default to the
+  // first element in the collection.
   //
   // Example:
   //   var numbers = [1,2,3];
