@@ -214,11 +214,11 @@ describe('every', function() {
     expect(_.every([true, {}, 1], passThrough)).to.equal(true);
   });
 
-  it('fails for a collection of all-falsey results', function() {
+  it('fails for a collection of all-falsy results', function() {
     expect(_.every([null, 0, undefined], passThrough)).to.equal(true);
   });
 
-  it('fails for a collection containing mixed falsey and truthy results', function() {
+  it('fails for a collection containing mixed falsy and truthy results', function() {
     expect(_.every([true, false, 1], passThrough)).to.equal(false);
   });
 
@@ -268,11 +268,11 @@ describe('some', function() {
     expect(_.some([true, {}, 1], passThrough)).to.equal(true);
   });
 
-  it('fails for a collection of all-falsey results', function() {
+  it('fails for a collection of all-falsy results', function() {
     expect(_.some([null, 0, undefined], passThrough)).to.equal(true);
   });
 
-  it('passes for a collection containing mixed falsey and truthy results', function() {
+  it('passes for a collection containing mixed falsy and truthy results', function() {
     expect(_.some([true, false, 1], passThrough)).to.equal(true);
   });
 
@@ -378,7 +378,7 @@ describe('defaults', function() {
     expect(defaulted.a).to.equal(10);
   });
 
-  it('should not copy a property if that key is already set on the target, even if the value for that key is falsey', function() {
+  it('should not copy a property if that key is already set on the target, even if the value for that key is falsy', function() {
     var to = {a: '', b: NaN};
     var from = {a: 1, b: 2};
     var defaulted = _.defaults(to, from);
