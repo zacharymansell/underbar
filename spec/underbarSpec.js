@@ -47,17 +47,17 @@ describe('each', function() {
   });
 
   it('should iterate over objects', function() {
-    var animals = {a: 'ant', b: 'bat', c: 'cat'};
+    var animals = { a: 'ant', b: 'bat', c: 'cat' };
     var iterationInputs = [];
 
     _.each(animals, function(animal, key, object) {
       iterationInputs.push([animal, key, object]);
     });
 
-    expect(iterations).to.eql([
-      ['ant', 'a', iterationInputs],
-      ['bat', 'b', iterationInputs],
-      ['cat', 'c', iterationInputs]
+    expect(iterationInputs).to.eql([
+      ['ant', 'a', animals],
+      ['bat', 'b', animals],
+      ['cat', 'c', animals]
     ]);
   });
 });
