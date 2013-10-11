@@ -1,5 +1,3 @@
-var returnArguments = function(){ return arguments; };
-
 describe('identity', function() {
   var uniqueObject = {};
 
@@ -235,22 +233,20 @@ describe('contains', function() {
 });
 
 describe('every', function() {
-  var passThrough = function(input) { return input; };
-
   it('passes by default for an empty collection', function() {
-    expect(_.every([], passThrough)).to.equal(true);
+    expect(_.every([], _.identity)).to.equal(true);
   });
 
   it('passes for a collection of all-truthy results', function() {
-    expect(_.every([true, {}, 1], passThrough)).to.equal(true);
+    expect(_.every([true, {}, 1], _.identity)).to.equal(true);
   });
 
   it('fails for a collection of all-falsy results', function() {
-    expect(_.every([null, 0, undefined], passThrough)).to.equal(false);
+    expect(_.every([null, 0, undefined], _.identity)).to.equal(false);
   });
 
   it('fails for a collection containing mixed falsy and truthy results', function() {
-    expect(_.every([true, false, 1], passThrough)).to.equal(false);
+    expect(_.every([true, false, 1], _.identity)).to.equal(false);
   });
 
   it('handles callbacks that do work on the input', function() {
@@ -261,8 +257,8 @@ describe('every', function() {
   });
 
   it('casts the result to a boolean', function() {
-    expect(_.every([1], passThrough)).to.equal(true);
-    expect(_.every([0], passThrough)).to.equal(false);
+    expect(_.every([1], _.identity)).to.equal(true);
+    expect(_.every([0], _.identity)).to.equal(false);
   });
 
   it('treats each item as as a callback result when no callback is provided', function() {
@@ -270,7 +266,7 @@ describe('every', function() {
   });
 
   it('works when provded a collection containing undefined values', function() {
-    expect(_.every([undefined, undefined, undefined], passThrough)).to.equal(false);
+    expect(_.every([undefined, undefined, undefined], _.identity)).to.equal(false);
   });
 });
 
@@ -278,9 +274,6 @@ describe('some', function() {
   var nativeSome = Array.prototype.some;
   var isEven = function(number){
     return number % 2 === 0;
-  };
-  var passThrough = function(input){
-    return input;
   };
 
   beforeEach(function() {
@@ -296,15 +289,15 @@ describe('some', function() {
   });
 
   it('passes for a collection of all-truthy results', function() {
-    expect(_.some([true, {}, 1], passThrough)).to.equal(true);
+    expect(_.some([true, {}, 1], _.identity)).to.equal(true);
   });
 
   it('fails for a collection of all-falsy results', function() {
-    expect(_.some([null, 0, undefined], passThrough)).to.equal(false);
+    expect(_.some([null, 0, undefined], _.identity)).to.equal(false);
   });
 
   it('passes for a collection containing mixed falsy and truthy results', function() {
-    expect(_.some([true, false, 1], passThrough)).to.equal(true);
+    expect(_.some([true, false, 1], _.identity)).to.equal(true);
   });
 
   it('passes for a set containing one truthy value that is a string', function() {
@@ -320,8 +313,8 @@ describe('some', function() {
   });
 
   it('casts the result to a boolean', function() {
-    expect(_.some([1], passThrough)).to.equal(true);
-    expect(_.some([0], passThrough)).to.equal(false);
+    expect(_.some([1], _.identity)).to.equal(true);
+    expect(_.some([0], _.identity)).to.equal(false);
   });
 });
 

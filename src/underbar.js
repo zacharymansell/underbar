@@ -207,7 +207,7 @@ var _ = {};
     // TIP: Many iteration problems can be most easily expressed in
     // terms of reduce(). Here's a freebie to demonstrate!
     return _.reduce(collection, function(wasFound, item) {
-      if(wasFound) {
+      if (wasFound) {
         return true;
       }
       return item === target;
@@ -219,7 +219,7 @@ var _ = {};
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
     /* SOLUTION */
-    iterator = iterator || function(i) { return i; };
+    iterator = iterator || _.identity;
 
     return !!_.reduce(collection, function(allPassed, val) {
       return allPassed && iterator(val);
@@ -232,7 +232,7 @@ var _ = {};
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     /* SOLUTION */
-    iterator = iterator || function(i) { return i; };
+    iterator = iterator || _.identity;
 
     return !_.every(collection, function(item) {
       return !iterator(item);
@@ -302,10 +302,11 @@ var _ = {};
     // time it's called.
     var alreadyCalled = false;
     var result;
+
     // TIP: We'll return a new function that delegates to the old one, but only
     // if it hasn't been called before.
-    return function(){
-      if(!alreadyCalled){
+    return function() {
+      if (!alreadyCalled) {
         // TIP: .apply(this, arguments) is the standard way to pass on all of the
         // infromation from one function call to another.
         result = func.apply(this, arguments);
@@ -319,7 +320,7 @@ var _ = {};
   // Memoize an expensive function by storing its results. You may assume
   // that the function takes only one argument and that it is a primitive.
   //
-  // Memoize should return a function that when called, will check if it has
+  // _.memoize should return a function that when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
