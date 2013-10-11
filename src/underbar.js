@@ -44,6 +44,9 @@ var _ = {};
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
+  //
+  // Note: _.each does not have a return value, but rather simply runs the
+  // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
     /* SOLUTION */
     if (Array.isArray(collection)) {
@@ -148,7 +151,7 @@ var _ = {};
   };
 
   // Calls the method named by methodName on each value in the list.
-  // Note: you will nead to learn a bit about .apply to complete this
+  // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
     /* SOLUTION */
     return _.map(collection, function(item) {
