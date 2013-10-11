@@ -153,6 +153,7 @@ var _ = {};
     /* SOLUTION */
     return _.map(collection, function(item) {
       var method = typeof functionOrKey === 'string' ? item[functionOrKey] : functionOrKey;
+
       return method.apply(item, args);
     });
     /* END SOLUTION */
