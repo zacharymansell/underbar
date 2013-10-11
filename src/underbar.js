@@ -343,7 +343,26 @@ var _ = {};
   // Shuffle an array.
   _.shuffle = function(array) {
     /* SOLUTION */
-    return array.slice().sort(function(){ return Math.random() - 0.5; });
+    // See http://bost.ocks.org/mike/shuffle/ for an in-depth explanation of the
+    // Fisher-Yates Shuffle
+
+    // Make a copy of the original array
+    var out = array.slice();
+    var temp;
+    var currentIx;
+    var swapIx;
+
+    while (currentIx) {
+      swapIx = Math.floor(Math.random() * currentIx);
+
+      currentIx -= 1;
+
+      temp = out[currentIx];
+      out[currentIx] = out[swapIx];
+      out[swapIx] = temp;
+    }
+
+    return out;
     /* END SOLUTION */
   };
 
