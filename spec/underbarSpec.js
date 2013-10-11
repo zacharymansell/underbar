@@ -215,7 +215,7 @@ describe('every', function() {
   });
 
   it('fails for a collection of all-falsy results', function() {
-    expect(_.every([null, 0, undefined], passThrough)).to.equal(true);
+    expect(_.every([null, 0, undefined], passThrough)).to.equal(false);
   });
 
   it('fails for a collection containing mixed falsy and truthy results', function() {
@@ -269,7 +269,7 @@ describe('some', function() {
   });
 
   it('fails for a collection of all-falsy results', function() {
-    expect(_.some([null, 0, undefined], passThrough)).to.equal(true);
+    expect(_.some([null, 0, undefined], passThrough)).to.equal(false);
   });
 
   it('passes for a collection containing mixed falsy and truthy results', function() {
