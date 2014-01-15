@@ -436,15 +436,23 @@ describe('once', function() {
 });
 
 describe('memoize', function() {
-  var fib, fastFib;
+  var fib, fastFib, timeCheck, fastTime, wait;
 
   beforeEach(function() {
     fib = function(n) {
       if(n < 2){ return n; }
       return fib(n - 1) + fib(n - 2);
     };
-
     fastFib = _.memoize(fib);
+
+    timeCheck = function(str) { return str + Date.now(); };
+    fastTime = _.memoize(timeCheck);
+
+    // Synchronous sleep: terrible for web development, awesome for testing _.memoize
+    wait = function(t) {
+      var start = Date.now();
+      while ((Date.now() - start) < t){}
+    };
   });
 
   it('a memoized function should produce the same result when called with the same arguments', function() {
@@ -456,6 +464,15 @@ describe('memoize', function() {
     expect(fib(10)).to.equal(55);
     expect(fastFib(10)).to.equal(55);
     expect(fastFib(7)).to.equal(13);
+  });
+
+  it('should not run the function twice for the same given argument', function() {
+    var firstTime = timeCheck('shazaam!');
+    wait(5);
+    var secondTime = fastTime('shazaam!');
+    wait(5);
+    expect(firstTime).to.not.equal(secondTime);
+    expect(fastTime('shazaam!')).to.equal(secondTime);
   });
 });
 
