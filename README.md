@@ -44,8 +44,8 @@ Some quick notes that may come in handy:
 As is, the repository is missing code for most of the functions. It's your job
 to fix the library by implementing them.
 
-The file `spec/underbarSpec.js` contains a test suite. Your goal is to get them
-all the tests to pass by implementing the missing functions. Run the tests by
+The files in the `spec` directory contain a test suite. Your goal is to get all
+the tests to pass by implementing the missing functions. Run the tests by
 opening `SpecRunner.html` in your browser.
 
 The file `src/underbar.js` contains function definitions and explanations for
@@ -84,10 +84,10 @@ each of the functions by making all the tests pass:
 - [ ] throttle
 
 **Note:** Some browsers provide built-in functions--including `forEach`, `map`,
-`reduce` and `filter`--that replicate some of the functions you will implement.
-Don't use them to implement your functions.
+`reduce` and `filter`--that replicate the functionality of some of the functions
+you will implement. Don't use them to implement your functions.
 
-### Throttle Notes
+### Throttle
 
 There's one function that is a little more complicated, so we've included some
 more context to help you along.

@@ -1,8 +1,7 @@
-/*jshint eqnull:true, expr:true*/
-
-var _ = {};
-
 (function() {
+  'use strict';
+
+  window._ = {};
 
   // Returns whatever value is passed as the argument. This function doesn't
   // seem very useful, but remember it--if a function needs to provide an
@@ -117,10 +116,12 @@ var _ = {};
     var hash = {};
 
     _.each(array, function(val) {
-      hash[val] = true;
+      hash[val] = val;
     });
 
-    return Object.keys(hash);
+    return _.map(hash, function(value) {
+      return value;
+    });
     /* END SOLUTION */
   };
 
@@ -157,18 +158,6 @@ var _ = {};
     return _.map(collection, function(item){
       return item[key];
     });
-  };
-
-  // Calls the method named by methodName on each value in the list.
-  // Note: you will nead to learn a bit about .apply to complete this.
-  _.invoke = function(collection, functionOrKey, args) {
-    /* START SOLUTION */
-    return _.map(collection, function(item) {
-      var method = typeof functionOrKey === 'string' ? item[functionOrKey] : functionOrKey;
-
-      return method.apply(item, args);
-    });
-    /* END SOLUTION */
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -316,10 +305,12 @@ var _ = {};
     };
   };
 
-  // Memoize an expensive function by storing its results. You may assume
+  // Memorize an expensive function's results by storing them. You may assume
   // that the function takes only one argument and that it is a primitive.
+  // memoize could be renamed to oncePerUniqueArgumentList; memoize does the
+  // same thing as once, but based on many sets of unique arguments.
   //
-  // _.memoize should return a function that when called, will check if it has
+  // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
@@ -385,10 +376,24 @@ var _ = {};
 
 
   /**
+   * EXTRA CREDIT
+   * =================
+   *
    * Note: This is the end of the pre-course curriculum. Feel free to continue,
    * but nothing beyond here is required.
    */
 
+  // Calls the method named by methodName on each value in the list.
+  // Note: You will need to learn a bit about .apply to complete this.
+  _.invoke = function(collection, functionOrKey, args) {
+    /* START SOLUTION */
+    return _.map(collection, function(item) {
+      var method = typeof functionOrKey === 'string' ? item[functionOrKey] : functionOrKey;
+
+      return method.apply(item, args);
+    });
+    /* END SOLUTION */
+  };
 
   // Sort the object's values by a criterion produced by an iterator.
   // If iterator is a string, sort objects by that property with the name
@@ -482,16 +487,11 @@ var _ = {};
     /* END SOLUTION */
   };
 
-
-  /**
-   * MEGA EXTRA CREDIT
-   * =================
-   */
-
   // Returns a function, that, when invoked, will only be triggered at most once
-  // during a given window of time.
+  // during a given window of time.  See the Underbar readme for extra details
+  // on this function.
   //
-  // See the Underbar readme for details.
+  // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
     /* START SOLUTION */
     return function() {
@@ -508,5 +508,4 @@ var _ = {};
     };
     /* END SOLUTION */
   };
-
-}).call(this);
+}());
