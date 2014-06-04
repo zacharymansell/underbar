@@ -48,7 +48,7 @@
         expect(_.every([1, undefined, true], _.identity)).to.be.false;
       });
 
-      it('should work when provded a collection containing undefined values', function() {
+      it('should work when provided a collection containing undefined values', function() {
         expect(_.every([undefined, undefined, undefined], _.identity)).to.be.false;
       });
 
