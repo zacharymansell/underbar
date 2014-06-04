@@ -383,7 +383,7 @@
    * but nothing beyond here is required.
    */
 
-  // Calls the method named by methodName on each value in the list.
+  // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
     /* START SOLUTION */
