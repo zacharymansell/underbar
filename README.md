@@ -35,9 +35,8 @@ Some quick notes that may come in handy:
   `myFunction` using the elements in the array as parameters, you can use
   `myFunction.apply(context, myParameters)`. The first parameter, `context`, is
   the execution context for your function call. From inside `myFunction`, you
-  can access it as `this`. For this exercise, you should be fine passing in the
-  calling function's `this` for `context`. If you're curious, you can read more
-  in the [documentation for apply](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/apply).
+  can access it as `this`. For this exercise, you can just pass `null` for `context`.
+  If you're curious, you can read more in the [documentation for apply](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/apply).
 
 ## Goals
 
@@ -50,7 +49,7 @@ opening `SpecRunner.html` in your browser.
 
 The file `src/underbar.js` contains function definitions and explanations for
 the following functions (*italicized functions* are solved for you). Implement
-each of the functions by making all the tests pass:
+each of the functions by making all of the tests pass:
 
 - [ ] identity
 - [ ] *first*
@@ -130,3 +129,5 @@ throttledIncrement(); // return 1; should do nothing
   assignment has stripped out some complexity from the original library; notice
   where these changes have been made, and try to understand what edge cases the
   original library is handling that your functions aren't.
+- Notice that the real underscore.js uses an object named `breaker`. Look through the
+  source and understand what this is doing, and how it optimizes some of the functions.
