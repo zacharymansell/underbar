@@ -1,16 +1,6 @@
 (function() {
   'use strict';
 
-  var clock;
-
-  before(function() {
-    clock = sinon.useFakeTimers();
-  });
-
-  after(function() {
-    clock.restore();
-  });
-
   describe('Part II', function() {
     describe('contains', function() {
       it('should return false if a collection does not contain a user-specified value', function() {

@@ -114,5 +114,25 @@
         expect(result).to.eql([3, 4]);
       });
     });
+
+    describe('throttle, when given a wait of 100ms', function() {
+      var callback;
+
+      beforeEach(function() {
+        callback = sinon.spy();
+      });
+
+      it('should return a function callable twice in the first 200ms', function() {
+        var fn = _.throttle(callback, 100);
+        fn(); // called
+        setTimeout(fn, 50);
+        setTimeout(fn, 100); // called
+        setTimeout(fn, 150);
+        setTimeout(fn, 199);
+        clock.tick(200);
+
+        expect(callback).to.have.been.calledTwice;
+      });
+    });
   });
 }());
