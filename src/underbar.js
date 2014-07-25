@@ -164,10 +164,11 @@
   // iterator(accumulator, item) for each item. accumulator should be
   // the return value of the previous iterator call.
   //  
-  // You can pass in an accumulator that is passed to the first iterator
-  // call. If an accumulator is not explicitly passed in, the iterator is
-  // not called on the first element, and the first element is used as the
-  // accumulator in an iterator call to the next element.
+  // You can pass in a starting value for the accumulator as the third argument
+  // to reduce. If no starting value is passed, the first element is used as
+  // the accumulator, and is never passed to the iterator. In other words, in
+  // the case where a starting value is not passed, the iterator is not invoked
+  // until the second element, with the first element as it's second argument.
   //  
   // Example:
   //   var numbers = [1,2,3];
