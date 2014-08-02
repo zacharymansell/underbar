@@ -41,16 +41,18 @@ Some quick notes that may come in handy:
 ## Goals
 
 As is, the repository is missing code for most of the functions. It's your job
-to fix the library by implementing them.
+to fix the library by implementing them. The functions are split in two sections,
+with a separate test suite for each.
 
-The files in the `spec` directory contain a test suite. Your goal is to get all
-the tests to pass by implementing the missing functions. Run the tests by
+The files in the `spec` directory contain the test suites. Your goal is to get all
+the tests to pass by implementing the missing functions. Run all the tests by
 opening `SpecRunner.html` in your browser.
 
 The file `src/underbar.js` contains function definitions and explanations for
 the following functions (*italicized functions* are solved for you). Implement
 each of the functions by making all of the tests pass:
 
+#### Part I:
 - [ ] identity
 - [ ] *first*
 - [ ] last
@@ -61,8 +63,9 @@ each of the functions by making all of the tests pass:
 - [ ] uniq
 - [ ] map
 - [ ] *pluck*
-- [ ] invoke
 - [ ] reduce
+
+#### Part II:
 - [ ] *contains*
 - [ ] every
 - [ ] some
@@ -73,8 +76,8 @@ each of the functions by making all of the tests pass:
 - [ ] delay
 - [ ] shuffle
 
-***Extra Credit:***
-
+#### Extra Credit:
+- [ ] invoke
 - [ ] sortBy
 - [ ] zip
 - [ ] flatten
@@ -120,7 +123,7 @@ throttledIncrement(); // return 1; should do nothing
 - If the wait period is 100ms and the function was last called 30ms ago, another
   call to the throttled function should schedule a call for 100ms in the future.
 
-## Extra Credit
+## Extra Extra Credit
 
 - Download the real [underscore.js](https://github.com/documentcloud/underscore/)
   implementation and test suite, and try to understand how it works. A great way

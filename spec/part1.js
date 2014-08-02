@@ -19,9 +19,14 @@
         expect(_.first([1,2,3])).to.equal(1);
       });
 
-      it('should be able to accept a user-defined index', function() {
-        expect(_.first([1,2,3], 0)).to.eql([]);
+      it('should accept an index argument', function() {
         expect(_.first([1,2,3], 2)).to.eql([1, 2]);
+      });
+
+      it('should return empty array if zero is passed in as the index', function() {
+        expect(_.first([1,2,3], 0)).to.eql([]);
+
+      it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
         expect(_.first([1,2,3], 5)).to.eql([1, 2, 3]);
       });
     });
@@ -35,7 +40,7 @@
         expect(_.last([1,2,3], 2)).to.eql([2, 3]);
       });
 
-      it('should return nothing if zero is passed in as the index', function() {
+      it('should return empty array if zero is passed in as the index', function() {
         expect(_.last([1,2,3], 0)).to.eql([]);
       });
 
@@ -94,7 +99,7 @@
     });
 
     describe('indexOf', function() {
-      it('should have 40 in the list', function() {
+      it('should find 40 in the list', function() {
         var numbers = [10, 20, 30, 40, 50];
 
         expect(_.indexOf(numbers, 40)).to.equal(3);
@@ -175,7 +180,7 @@
       });
 
       it('should handle iterators that work with a sorted array', function() {
-        var iterator = function(value) { return value +1; };
+        var iterator = function(value) { return value + 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
 
         expect(_.uniq(numbers, true, iterator)).to.eql([1, 2, 3, 4]);
