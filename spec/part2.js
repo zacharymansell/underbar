@@ -277,6 +277,18 @@
         expect(shuffled).to.not.equal(numbers);
         expect(numbers).to.eql([4, 5, 6]);
       });
+      it('should have the same elements as the original object', function() {
+        var numbers = [4, 5, 6];
+        var shuffled = _.shuffle(numbers).sort();
+
+        expect(shuffled).to.eql([4, 5, 6]);
+      });
+      it('should not be in the same order as the original object', function() {
+        var numbers = [4, 5, 6];
+        var shuffled = _.shuffle(numbers);
+
+        expect(shuffled).to.not.eql([4, 5, 6]);
+      });
     });
   });
 }());

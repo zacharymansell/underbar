@@ -364,7 +364,7 @@
     // Make a copy of the original array
     var out = array.slice();
     var temp;
-    var currentIx;
+    var currentIx = array.length - 1;
     var swapIx;
 
     while (currentIx) {
