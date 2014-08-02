@@ -501,9 +501,9 @@
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
     /* START SOLUTION */
-    return function() {
-      var flag = false;
+    var flag = false;
 
+    return function() {
       if (flag !== true) {
         flag = true;
         func.apply(Array.prototype.slice.apply(arguments));
