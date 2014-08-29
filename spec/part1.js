@@ -25,6 +25,7 @@
 
       it('should return empty array if zero is passed in as the index', function() {
         expect(_.first([1,2,3], 0)).to.eql([]);
+      });
 
       it('should return all the array\'s elements if the index argument is larger than the length of the array', function() {
         expect(_.first([1,2,3], 5)).to.eql([1, 2, 3]);
@@ -238,24 +239,24 @@
     describe('reduce', function() {
       it('should be able to sum up an array', function() {
         var add = function(tally, item) {return tally + item; };
-        var total = _.reduce([1, 2, 3], add, 0); 
+        var total = _.reduce([1, 2, 3], add, 0);
 
         expect(total).to.equal(6);
-      }); 
-      
+      });
+
       it('should use the first element as an accumulator when none is given', function() {
         var add = function(tally, item) {return tally + item; };
         var total = _.reduce([1, 2, 3], add);
 
         expect(total).to.equal(6);
-      }); 
+      });
 
       it('should invoke the iterator on the first element when given an accumulator', function() {
         var sumSquares = function(tally, item) {return tally + item * item; };
-        var total = _.reduce([2, 3], sumSquares, 0); 
+        var total = _.reduce([2, 3], sumSquares, 0);
 
         expect(total).to.equal(13);
-      }); 
+      });
 
       it('should not invoke the iterator on the first element when using it as an accumulator', function() {
         var sumSquares = function(tally, item) {return tally + item * item; };
@@ -266,4 +267,5 @@
 
     });
   });
+
 }());
