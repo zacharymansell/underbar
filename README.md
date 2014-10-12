@@ -120,8 +120,8 @@ throttledIncrement(); // return 1; should do nothing
   function.
 - The throttled function should always return the most recently returned value of
   the original function.
-- If the wait period is 100ms and the function was last called 30ms ago, another
-  call to the throttled function should schedule a call for 100ms in the future.
+- If the wait period is 100ms and the function was last called 30ms ago,
+  another call to the throttled function should schedule a call for 0ms after the wait period is over.
 
 ## Extra Extra Credit
 
