@@ -10,7 +10,8 @@ dependencies:
     - npm install -g mocha-phantomjs
 test:
   override:
-    - mocha-phantomjs --no-colors --reporter min ./SpecRunner.html
+    # - mocha-phantomjs --no-colors --reporter min ./SpecRunner.html
+    echo "test not run"
 deployment:
   master:
     branch: master
