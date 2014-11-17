@@ -11,7 +11,7 @@ dependencies:
 test:
   override:
     # - mocha-phantomjs --no-colors --reporter min ./SpecRunner.html
-    echo "test not run"
+    - echo "test not run"
 deployment:
   master:
     branch: master
