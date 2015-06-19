@@ -359,6 +359,26 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    // See http://bost.ocks.org/mike/shuffle/ for an in-depth explanation of the
+    // Fisher-Yates Shuffle
+
+    // Make a copy of the original array
+    var out = array.slice();
+    var temp;
+    var currentIx = array.length - 1;
+    var swapIx;
+
+    while (currentIx) {
+      swapIx = Math.floor(Math.random() * currentIx);
+
+      currentIx -= 1;
+
+      temp = out[currentIx];
+      out[currentIx] = out[swapIx];
+      out[swapIx] = temp;
+    }
+
+    return out;
   };
 
 
@@ -373,6 +393,11 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    return _.map(collection, function(item) {
+      var method = typeof functionOrKey === 'string' ? item[functionOrKey] : functionOrKey;
+
+      return method.apply(item, args);
+    });
   };
 
   // Sort the object's values by a criterion produced by an iterator.
@@ -380,6 +405,20 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    if (!collection.length) {
+      throw new TypeError('Collection must be an array.');
+    }
+
+    if (Object.prototype.toString.call(iterator) === '[object String]') {
+      var iter = iterator;
+      iterator = function(item) {
+        return item[iter];
+      };
+    }
+
+    return collection.sort(function(a, b) {
+      return iterator(a) - iterator(b);
+    });
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -388,6 +427,18 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var max = 0;
+    var result = new Array(max);
+
+    _.each(arguments, function(arg) {
+      max = Math.max(arg.length, max);
+    });
+
+    for (var i = 0; i < max; i++) {
+      result[i] = _.pluck(arguments, i);
+    }
+
+    return result;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
@@ -395,16 +446,40 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    return _.reduce(nestedArray, function(memo, val){
+      return memo.concat(Array.isArray(val) ? _.flatten(val) : [val]);
+    }, []);
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    // Get a copy of all the other arrays. We'll use the array at arguments[0]
+    // as our baseline; we only need to check the values in arguments[0] since
+    // if another array contains a value not contained within our first array,
+    // it's not a valid value.
+    var others = Array.prototype.slice.call(arguments, 1);
+
+    // Now, let's get a copy of arguments[0] that doesn't contain duplicates and
+    // see if each value appears as an indexOf every single other array.
+    return _.filter(_.uniq(arguments[0]), function(item) {
+      return _.every(others, function(array) {
+        return _.indexOf(array, item) > -1;
+      });
+    });
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    // Get a flattened version of all other input arrays
+    var others = _.flatten(Array.prototype.slice.call(arguments, 1));
+
+    // Extract only the items that aren't contained within the flattened
+    // `others` array
+    return _.filter(array, function(item) {
+      return !_.contains(others, item);
+    });
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
@@ -413,5 +488,17 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var flag = false;
+
+    return function() {
+      if (flag !== true) {
+        flag = true;
+        func.apply(Array.prototype.slice.apply(arguments));
+
+        setTimeout(function() {
+          flag = false;
+        }, wait);
+      }
+    };
   };
 }());
