@@ -302,7 +302,36 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
+
+  // example usage
+
+  // var fib = function(){}
+  // var fastFib = _.memoize(fib);
+
+  // fastFib(5) // 8 -> fib
+  // fastFib(5) // return 8
+
+  // strigifying arguments
+
+  // multiply(3,3,3) // first time, calculate
+  // {'3,3,3': 27}   // what goes into storage
+  // multiply(3,3,3) // lookup in storage
+
+  // multiply(3) // first time, calculate
+  // {'3': 3}    // what goes into storage
+  // multiply(3) // lookup in storage
+
   _.memoize = function(func) {
+    var storage = {};
+
+    return function(){
+      var arg = JSON.stringify(arguments);
+
+      if( !storage.hasOwnProperty(arg) ){
+        storage[arg] = func.apply(null, arguments);
+      }
+      return storage[arg];
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -312,6 +341,10 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = Array.prototype.slice.call(arguments, 2);
+    setTimeout( function(){
+      func.apply(null, args);
+    }, wait );
   };
 
 
