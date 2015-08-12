@@ -38,7 +38,7 @@ Some quick notes that may come in handy:
   can access it as `this`. For this exercise, you can just pass `null` for `context`.
   If you're curious, you can read more in the [documentation for apply](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/apply).
 
-## Goals
+## Bare Minimum Requirements
 
 As is, the repository is missing code for most of the functions. It's your job
 to fix the library by implementing them. The functions are split in two sections,
@@ -76,7 +76,7 @@ each of the functions by making all of the tests pass:
 - [ ] delay
 - [ ] shuffle
 
-#### Extra Credit:
+#### Advanced
 - [ ] invoke
 - [ ] sortBy
 - [ ] zip
@@ -123,7 +123,7 @@ throttledIncrement(); // return 1; should do nothing
 - If the wait period is 100ms and the function was last called 30ms ago,
   another call to the throttled function should schedule a call for 0ms after the wait period is over.
 
-## Extra Extra Credit
+## More Advanced
 
 - Download the real [underscore.js](https://github.com/documentcloud/underscore/)
   implementation and test suite, and try to understand how it works. A great way
