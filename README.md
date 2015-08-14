@@ -134,3 +134,13 @@ throttledIncrement(); // return 1; should do nothing
   original library is handling that your functions aren't.
 - Notice that the real underscore.js uses an object named `breaker`. Look through the
   source and understand what this is doing, and how it optimizes some of the functions.
+- Make a contribution to the open source [underscore.js](https://github.com/documentcloud/underscore/) project!
+
+Don't be intimidated! You can be involved in making contributions to the project in a number of ways, and you already know how to fork repos and submit PRs from your work here at the school.
+- Writing or editting existing docs could be as simple as a typo fix.
+- Weighing in on discussions happening in the issues (though you might want to avoid flame wars or conversations that might hurt your reputation).
+- Identifying problems in the code base and starting a new issue.
+- Submitting PR's for existing issues.
+
+Start by reading underscore's [CONTRIBUTING.md](https://github.com/jashkenas/underscore/blob/master/CONTRIBUTING.md), make a plan with your pair and get to work! You'll have to decide which of your GitHub accounts will be making the contributions. See if you can work fast enough so that each of you gets to use your GitHub account for a contribution.
+
