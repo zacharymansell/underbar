@@ -125,6 +125,8 @@ throttledIncrement(); // return 1; should do nothing
 
 ## More Advanced
 
+Our advanced content is intended to throw you in over your head, requiring you to solve problems with very little support or oversight, much like you would as a mid or senior level engineer. The following is no exception, and you may have to do a fair amount of work to get enough context to get started.
+
 - Download the real [underscore.js](https://github.com/documentcloud/underscore/)
   implementation and test suite, and try to understand how it works. A great way
   to do this is to break parts of the code and see which tests fail.
