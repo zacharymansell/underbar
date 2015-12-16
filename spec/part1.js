@@ -66,52 +66,154 @@
         _.each([1,2,3,4], function(number) {});
       });
 
-      it('should iterate over arrays, providing access to the element, index, and array itself', function() {
-        var animals = ['ant', 'bat', 'cat'];
-        var iterationInputs = [];
+      it('should be a function', function() {
+        expect(_.each).to.be.an.instanceOf(Function);
+      });
 
-        _.each(animals, function(animal, index, list) {
-          iterationInputs.push([animal, index, list]);
+      it('should not return anything', function() {
+        var returnValue = _.each([], function(){});
+        expect(returnValue).to.not.exist;
+      });
+
+      it('should not mutate the input array', function() {
+        var input = [1,2,3,4,5];
+        var result = _.each(input, function(item) { /* noop */ });
+
+        /*
+         * Mutation of inputs should be avoided without good justification otherwise
+         * as it can often lead to hard to find bugs and confusing code!
+         * Imagine we were reading the code above, and we added the following line:
+         *
+         * var lastElement = input[input.length - 1];
+         *
+         * Without knowing that mutation occured inside of reduceRight,
+         * we would assume that `lastElement` is 5. But if inside of
+         * reduceRight, we use the array method `pop`, we would permanently
+         * change `input` and our assumption would not longer be true,
+         * `lastElement` would be 4 instead!
+         *
+         * The tricky part is that we have no way of knowing about the mutation
+         * just by looking at the code above. We'd have to dive into the
+         * implementation of reduceRight to the exact line that uses `pop`.
+         * If we write a lot of code with this assumption, it might be very hard
+         * to trace back to the correct line in reduceRight.
+         *
+         * You can avoid an entire class of bugs by writing functions
+         * that don't mutate their inputs!
+         */
+
+        expect(input).to.eql([1,2,3,4,5])
+      });
+
+      it(' should iterate over arrays and provide access to each value', function() {
+        var letters = ['a', 'b', 'c'];
+        var iterations = [];
+
+        _.each(letters, function(letter) {
+          iterations.push(letter);
         });
 
-        expect(iterationInputs).to.eql([
-          ['ant', 0, animals],
-          ['bat', 1, animals],
-          ['cat', 2, animals]
+        expect(iterations).to.eql(['a','b','c']);
+      });
+
+      it('should iterate over arrays and provide access to each index', function() {
+        var letters = ['a', 'b', 'c'];
+        var iterations = [];
+
+        _.each(letters, function(letter, index) {
+          iterations.push([letter, index]);
+        });
+
+        expect(iterations).to.eql([
+          ['a', 0],
+          ['b', 1],
+          ['c', 2]
         ]);
       });
 
-      it('should only iterate over the array elements, not properties of the array', function() {
-        var animals = ['ant', 'bat', 'cat'];
-        var iterationInputs = [];
+      it('should iterate over arrays and provide access to the original collection', function() {
+        var letters = ['a', 'b', 'c'];
+        var iterations = [];
 
-        animals.shouldBeIgnored = 'Ignore me!';
-
-        _.each(animals, function(animal, index, list) {
-          iterationInputs.push([animal, index, list]);
+        _.each(letters, function(letter, index, collection) {
+          iterations.push([letter, index, collection]);
         });
 
-        expect(iterationInputs).to.eql([
-          ['ant', 0, animals],
-          ['bat', 1, animals],
-          ['cat', 2, animals]
+        expect(iterations).to.eql([
+          ['a', 0, letters],
+          ['b', 1, letters],
+          ['c', 2, letters]
         ]);
       });
 
-      it('should iterate over objects, providing access to the element, index, and object itself', function() {
-        var animals = { a: 'ant', b: 'bat', c: 'cat' };
-        var iterationInputs = [];
+      it('should only iterate over numeric keys of an array, not all properties', function() {
+        var iterations = [];
+        var letters = ['a', 'b', 'c'];
+        letters.someProperty = 'Do not iterate over me!';
 
-        _.each(animals, function(animal, key, object) {
-          iterationInputs.push([animal, key, object]);
+        _.each(letters, function(letter, index, collection) {
+          iterations.push(letter);
         });
 
-        expect(iterationInputs).to.eql([
-          ['ant', 'a', animals],
-          ['bat', 'b', animals],
-          ['cat', 'c', animals]
+        expect(iterations).to.not.include('Do not iterate over me!');
+      });
+
+      it('should iterate over objects and provide access to each value', function() {
+        var letters = {d: 'dog', e: 'elephant', f: 'flotsam'};
+        var iterations = [];
+
+        _.each(letters, function(value) {
+          iterations.push(value);
+        });
+
+        expect(iterations).to.eql(['dog', 'elephant', 'flotsam']);
+      });
+
+      it('should iterate over objects and provide access to each key', function() {
+        var letters = {d: 'dog', e: 'elephant', f: 'flotsam'};
+        var iterations = [];
+
+        _.each(letters, function(value, property) {
+          iterations.push([value, property]);
+        });
+
+        expect(iterations).to.eql([
+          ['dog', 'd'],
+          ['elephant', 'e'],
+          ['flotsam', 'f']
         ]);
       });
+
+      it('should iterate over objects and provide access to the original object', function() {
+        var letters = {d: 'dog', e: 'elephant', f: 'flotsam'};
+        var iterations = [];
+
+        _.each(letters, function(value, property, object) {
+          iterations.push([value, property, object]);
+        });
+
+        expect(iterations).to.eql([
+          ['dog', 'd', letters],
+          ['elephant', 'e', letters],
+          ['flotsam', 'f', letters]
+        ]);
+      });
+
+      it('should not confuse an object with a `length` property for an array', function() {
+        var dresser = { length: 39, width: 79, height: 127};
+        var iterations = [];
+
+        _.each(dresser, function(value, property, object) {
+          iterations.push([value, property, object]);
+        });
+
+        expect(iterations).to.eql([
+          [39, 'length', dresser],
+          [79, 'width', dresser],
+          [127, 'height', dresser]
+        ]);
+      });
+
     });
 
     describe('indexOf', function() {
