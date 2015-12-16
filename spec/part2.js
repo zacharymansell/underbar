@@ -327,10 +327,10 @@
       it('should copy properties source an arbitrary number of source objects', function() {
         var destination = {};
         var source = { a: 1 };
-        var alsoFrom = { b: 2, c: 'three' };
-        var evenMoreFrom = { d: 'four' };
+        var anotherSource = { b: 2, c: 'three' };
+        var aThirdSource = { d: 'four' };
 
-        _.defaults(destination, source, alsoFrom, evenMoreFrom);
+        _.defaults(destination, source, anotherSource, aThirdSource);
 
         expect(destination.a).to.equal(1);
         expect(destination.b).to.equal(2);
@@ -341,9 +341,9 @@
       it('should prefer the first value found when two objects are provided with properties at the same key', function() {
         var destination = {};
         var source = { a: 1 };
-        var alsoFrom = { a: 'one' };
+        var anotherSource = { a: 'one' };
 
-        _.defaults(destination, source, alsoFrom);
+        _.defaults(destination, source, anotherSource);
 
         expect(destination.a).to.equal(1);
       });
