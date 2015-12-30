@@ -428,7 +428,7 @@
         expect(memoAdd(1, 3)).to.equal(4);
       });
 
-      it('should not run the memoized function twice for any given set of arguments', function() {
+      it('should not run the memoized function twice when given a primitive type as an argument', function() {
         // Here, we wrap a dummy function in a spy. A spy is a wrapper function (much like _.memoize
         // or _.once) that keeps track of interesting information about the function it's spying on;
         // e.g. whether or not the function has been called.
@@ -441,10 +441,8 @@
         expect(spy).to.have.been.calledOnce;
       });
       
-      it('should not run the memoized function twice for any given set of arguments', function() {
-        // Here, we wrap a dummy function in a spy. A spy is a wrapper function (much like _.memoize
-        // or _.once) that keeps track of interesting information about the function it's spying on;
-        // e.g. whether or not the function has been called.
+      it('should not run the memoized function twice when given a reference type as an argument', function() {
+        // Be careful how you are checking if a set of arguments has been passed in already
         var spy = sinon.spy(function() { return 'Dummy output'; });
         var memoSpy = _.memoize(spy);
 
@@ -452,6 +450,17 @@
         expect(spy).to.have.been.calledOnce;
         memoSpy([1,2,3]);
         expect(spy).to.have.been.calledOnce;
+      });
+
+      it('should run the memoized function twice when given an array and then given a list of arguments', function() {
+        // Be careful how you are checking if a set of arguments has been passed in already
+        var spy = sinon.spy(function() { return 'Dummy output'; });
+        var memoSpy = _.memoize(spy);
+
+        memoSpy([1,2,3]);
+        expect(spy).to.have.been.calledOnce;
+        memoSpy(1,2,3);
+        expect(spy).to.have.been.calledTwice;
       });
     });
 
