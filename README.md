@@ -127,21 +127,23 @@ throttledIncrement(); // return 1; should do nothing
 
 Our advanced content is intended to throw you in over your head, requiring you to solve problems with very little support or oversight, much like you would as a mid or senior level engineer. The following is no exception, and you may have to do a fair amount of work to get enough context to get started.
 
-- Download the real [underscore.js](https://github.com/documentcloud/underscore/)
-  implementation and test suite, and try to understand how it works. A great way
-  to do this is to break parts of the code and see which tests fail.
-- Compare your implementations to the ones in the real library. Notice that this
-  assignment has stripped out some complexity from the original library; notice
-  where these changes have been made, and try to understand what edge cases the
-  original library is handling that your functions aren't.
+### ES6
 
-- Make a contribution to the open source [underscore.js](https://github.com/documentcloud/underscore/) project!
+The *ECMAScript* specification is a scripting language specification upon which JavaScript implementations (such as those found in web browsers like Chrome) are based. In June 2015, the 6th edition of the ECMAScript standard was finalized, and is commonly referred to as ES6.
 
-Don't be intimidated! You can be involved in making contributions to the project in a number of ways, and you already know how to fork repos and submit PRs from your work here at the school.
-- Writing or editting existing docs could be as simple as a typo fix.
-- Weighing in on discussions happening in the issues (though you might want to avoid flame wars or conversations that might hurt your reputation).
-- Identifying problems in the code base and starting a new issue.
-- Submitting PR's for existing issues.
+ES6 introduces a wealth of new features to JavaScript while being entirely reverse-compatible with older JavaScript. Even the most popular of web browsers like Chrome have a ton of work to do before all ES6 features are available, however, a lot of developers are using ES6 features and you should look forward to seeing more and more of ES6 in the next several years.
 
-Start by reading underscore's [CONTRIBUTING.md](https://github.com/jashkenas/underscore/blob/master/CONTRIBUTING.md), make a plan with your pair and get to work! You'll have to decide which of your GitHub accounts will be making the contributions. See if you can work fast enough so that each of you gets to use your GitHub account for a contribution.
+You can play around with ES6 in Chrome by enabling "experimental JavaScript Features". To do this:
 
+- [ ] Visit `chrome://flags/#enable-javascript-harmony` in Chrome and 'Enable Experimental JavaScript'. After restarting the browser, Chrome will now accept and run many new ES6 features, allowing you to attempt the refactor described next.
+
+### Refactor with ES6 Arrow Functions and Rest parameters
+
+ES6 introduces a slick new feature called *arrow function expressions* that provide syntactic sugar to make anonymous higher order functions (such as those you have been building out during this Underbar sprint) much more concise. Arrow function expressions also provide lexical scoping to the `this` value.
+
+ES6 also provides a feature called *rest parameters* which provide syntactic sugar for making your work with function parameters much more appealing.
+
+- [ ] Refactor your already-test-passing Underbar functions to helpfully utilize arrow function expressions and rest parameters. Assuming your refactors are correct, and that you have enabled experimental JavaScript in the step above, your tests will continue to pass
+  - MDN is the source of truth for JavaScript. Refer to MDN's [arrow function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) and [rest parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) documentation for reference and helpful information to get started.
+
+*Important Note*: Again, our advanced content is intended to throw you in over your head. It is expected you feel underprepared for this particular task. Be strong and enjoy moving into the unknown. You will thrive in this industry if you learn to love learning with little support. Go make some mistakes, collaborate with your team, and figure it out. You got this!
