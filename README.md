@@ -135,13 +135,13 @@ ES6 introduces a wealth of new features to JavaScript while being entirely rever
 
 You can play around with ES6 in Chrome by enabling "experimental JavaScript Features". To do this:
 
-- [ ] Visit chrome://flags/#enable-javascript-harmony in Chrome and 'Enable Experimental JavaScript'. After restarting the browser, Chrome will now accept and run many new ES6 features, allowing you to attempt the refactor described next.
+- [ ] Visit `chrome://flags/#enable-javascript-harmony` in Chrome and 'Enable Experimental JavaScript'. After restarting the browser, Chrome will now accept and run many new ES6 features, allowing you to attempt the refactor described next.
 
 ### Refactor with ES6 Arrow Functions and Rest parameters
 
 ES6 introduces a slick new feature called *arrow function expressions* that provide syntactic sugar to make anonymous higher order functions (such as those you have been building out during this Underbar sprint) much more concise. Arrow function expressions also provide lexical scoping to the `this` value.
 
-ES6 also provides a feature called *rest parameters* which provide syntactic sugar for working with arguments much more appealing.
+ES6 also provides a feature called *rest parameters* which provide syntactic sugar for making your work with function parameters much more appealing.
 
 - [ ] Refactor your already-test-passing Underbar functions to helpfully utilize arrow function expressions and rest parameters. Assuming your refactors are correct, and that you have enabled experimental JavaScript in the step above, your tests will continue to pass
   - MDN is the source of truth for JavaScript. Refer to MDN's [arrow function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) and [rest parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) documentation for reference and helpful information to get started.
