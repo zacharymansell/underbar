@@ -76,7 +76,8 @@ each of the functions by making all of the tests pass:
 - [ ] delay
 - [ ] shuffle
 
-#### Advanced
+## Advanced Content
+
 - [ ] invoke
 - [ ] sortBy
 - [ ] zip
@@ -123,9 +124,7 @@ throttledIncrement(); // return 1; should do nothing
 - If the wait period is 100ms and the function was last called 30ms ago,
   another call to the throttled function should schedule a call for 0ms after the wait period is over.
 
-## More Advanced
-
-Our advanced content is intended to throw you in over your head, requiring you to solve problems with very little support or oversight, much like you would as a mid or senior level engineer. The following is no exception, and you may have to do a fair amount of work to get enough context to get started.
+## Nightmare Mode
 
 ### ES6
 
