@@ -11,7 +11,7 @@ authored by Jeremy Ashkenas.
 
 **If you are in Precourse, please skip this section entirely!**
 
-In the root directory of this sprint, run
+In Terminal, run the following command from within this repository:
 ```
 curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash
 ```
