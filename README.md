@@ -7,9 +7,9 @@ TDD approach to learning. It walks you through a reimplementation of
 [underscore.js](http://underscorejs.org/), a popular collection of useful functions
 authored by Jeremy Ashkenas.
 
-## Install Pomander
+#### If you are in Precourse, please skip the entire 'Install Pomander' section
 
-**If you are in Precourse, please skip this section entirely!**
+## Install Pomander
 
 In Terminal, run the following command from within this repository:
 ```
