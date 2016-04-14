@@ -144,9 +144,9 @@ The *ECMAScript* specification is a scripting language specification upon which 
 
 ES6 introduces a wealth of new features to JavaScript while being entirely reverse-compatible with older JavaScript. Even the most popular of web browsers like Chrome have a ton of work to do before all ES6 features are available, however, a lot of developers are using ES6 features and you should look forward to seeing more and more of ES6 in the next several years.
 
-You can play around with ES6 in Chrome by enabling "experimental JavaScript Features". To do this:
+You can play around with ES6 in the latest version of Chrome.
 
-- [ ] Visit `chrome://flags/#enable-javascript-harmony` in Chrome and 'Enable Experimental JavaScript'. After restarting the browser, Chrome will now accept and run many new ES6 features, allowing you to attempt the refactor described next.
+- [ ] Visit `chrome://help` in Chrome and ensure that you are using version 49 or above. Once you're up to date with the latest version, Chrome will accept and run many new ES6 features, allowing you to attempt the refactor described next.
 
 ### Refactor with ES6 Arrow Functions and Rest parameters
 
