@@ -7,18 +7,6 @@ TDD approach to learning. It walks you through a reimplementation of
 [underscore.js](http://underscorejs.org/), a popular collection of useful functions
 authored by Jeremy Ashkenas.
 
-#### If you are in Precourse, please skip the entire 'Install Pomander' section
-
-## Install Pomander
-
-In Terminal, run the following command from within this repository:
-```
-curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash
-```
-[Pomander](https://github.com/hackreactor-labs/pomander) will check your code for syntax errors and violations against the [style guide](http://bookstrap.hackreactor.com/wiki/Style-Guide) before each commit.
-
-It uses a pre-commit hook to run staged files through `eslint` before each commit. `eslint` is a linter that will block your commit should you have any syntax errors, or, should you violate the Hack Reactor style guide. There are some preferred whitespace style rules that will give warnings but not block your commit. Your work will be of a higher quality if you follow the instructions of the linter. That said, if the linter gives you any funny bugs, these bugs are not intentional, and you should feel free to skip using it during commits with the `--no-verify` option.
-
 ## Links and Resources
 
 Some quick notes that may come in handy:
