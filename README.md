@@ -123,26 +123,3 @@ throttledIncrement(); // return 1; should do nothing
   the original function.
 - If the wait period is 100ms and the function was last called 30ms ago,
   another call to the throttled function should schedule a call for 0ms after the wait period is over.
-
-## Nightmare Mode
-
-### ES6
-
-The *ECMAScript* specification is a scripting language specification upon which JavaScript implementations (such as those found in web browsers like Chrome) are based. In June 2015, the 6th edition of the ECMAScript standard was finalized, and is commonly referred to as ES6.
-
-ES6 introduces a wealth of new features to JavaScript while being entirely reverse-compatible with older JavaScript. Even the most popular of web browsers like Chrome have a ton of work to do before all ES6 features are available, however, a lot of developers are using ES6 features and you should look forward to seeing more and more of ES6 in the next several years.
-
-You can play around with ES6 in the latest version of Chrome.
-
-- [ ] Visit `chrome://help` in Chrome and ensure that you are using version 49 or above. Once you're up to date with the latest version, Chrome will accept and run many new ES6 features, allowing you to attempt the refactor described next.
-
-### Refactor with ES6 Arrow Functions and Rest parameters
-
-ES6 introduces a slick new feature called *arrow function expressions* that provide syntactic sugar to make anonymous higher order functions (such as those you have been building out during this Underbar sprint) much more concise. Arrow function expressions also provide lexical scoping to the `this` value.
-
-ES6 also provides a feature called *rest parameters* which provide syntactic sugar for making your work with function parameters much more appealing.
-
-- [ ] Refactor your already-test-passing Underbar functions to helpfully utilize arrow function expressions and rest parameters. Assuming your refactors are correct, and that you have enabled experimental JavaScript in the step above, your tests will continue to pass
-  - MDN is the source of truth for JavaScript. Refer to MDN's [arrow function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) and [rest parameter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) documentation for reference and helpful information to get started.
-
-*Important Note*: Again, our advanced content is intended to throw you in over your head. It is expected you feel underprepared for this particular task. Be strong and enjoy moving into the unknown. You will thrive in this industry if you learn to love learning with little support. Go make some mistakes, collaborate with your team, and figure it out. You got this!
